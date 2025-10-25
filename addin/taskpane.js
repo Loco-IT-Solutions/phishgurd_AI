@@ -43,20 +43,17 @@ function getBodyText(item) {
     });
 }
 
-function renderBadge({ severity, score, reasons }) {
+function renderBadge({ severity = "safe", score = 0, reasons = [] }) {
     const el = document.getElementById("result");
-    const sev = (severity || "safe").toLowerCase();
-    const klass = ["high", "medium", "low"].includes(sev) ? sev : "";
-    const s = (typeof score === "number") ? score.toFixed(3) : "—";
-    const why = Array.isArray(reasons) && reasons.length ? reasons.join(", ") : "—";
-
+    const sev = (severity || "safe").toLowerCase();  // safe | low | medium | high
     el.innerHTML = `
-    <div class="bar ${klass}">
-      <div style="font-weight:700; margin-bottom:2px">Risk: ${sev.toUpperCase()} (${s})</div>
-      <div class="meta">Reasons: ${escapeHtml(why)}</div>
+    <div class="pg-badge ${sev}">
+      <div class="pg-title">Risk: ${sev.toUpperCase()} (${Number(score).toFixed(3)})</div>
+      <div class="pg-sub">Reasons: ${(reasons && reasons.length) ? reasons.join(", ") : "—"}</div>
     </div>
   `;
 }
+
 
 function renderError(msg) {
     const el = document.getElementById("result");

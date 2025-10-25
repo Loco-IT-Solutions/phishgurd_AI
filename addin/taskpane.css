@@ -1,0 +1,81 @@
+/* Base theme tokens */
+:root{
+  --bg:#ffffff;
+  --fg:#0f172a;          /* text */
+  --muted:#64748b;
+  --panel:#f8fafc;
+  --border:#e2e8f0;
+
+  --safe:#16a34a;
+  --low:#eab308;
+  --med:#f59e0b;
+  --high:#b91c1c;
+}
+
+/* Auto match Outlook dark mode */
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0b0f19;
+    --fg:#e5e7eb;
+    --muted:#9aa4b2;
+    --panel:#111827;
+    --border:#1f2937;
+  }
+}
+
+html,body{
+  margin:0;
+  padding:12px 14px;
+  font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  background:var(--bg);
+  color:var(--fg);
+}
+
+/* Inputs & buttons */
+input[type="text"], .pg-input{
+  width:100%;
+  padding:8px 10px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--panel);
+  color:var(--fg);
+  outline:none;
+}
+button.pg{
+  padding:8px 12px;
+  border:0;
+  border-radius:8px;
+  background:#0ea5e9;
+  color:#fff;
+  cursor:pointer;
+}
+
+/* Badge card */
+#result { margin-top:10px; }
+.pg-badge{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-left:6px solid var(--safe);
+  border-radius:10px;
+  padding:12px;
+  color:var(--fg);
+}
+.pg-badge.low { border-left-color:var(--low); }
+.pg-badge.medium { border-left-color:var(--med); }
+.pg-badge.high { border-left-color:var(--high); }
+
+.pg-title{ font-weight:700; margin-bottom:6px; }
+.pg-sub{ font-size:12px; color:var(--muted); }
+
+/* Links list */
+#links { margin-top:14px; }
+.pg-link{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:10px;
+  margin:8px 0;
+  color:var(--fg);
+}
+.pg-link a{ color:#0ea5e9; text-decoration:none; }
+.pg-link a:hover{ text-decoration:underline; }

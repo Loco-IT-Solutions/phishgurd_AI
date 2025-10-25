@@ -1,34 +1,20 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <title>PhishGuard</title>
-  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <style>
-    :root { color-scheme: light dark; }
-    body { font-family: system-ui, Segoe UI, Arial, sans-serif; margin: 0; padding: 14px; }
-    h3 { margin: 0 0 10px 0; }
-    .bar { border-left: 6px solid #16a34a; padding: 12px; background: #f8fafc; border-radius: 10px; }
-    .bar.high   { border-left-color:#b91c1c; background:#fef2f2; }
-    .bar.medium { border-left-color:#f59e0b; background:#fffbeb; }
-    .bar.low    { border-left-color:#eab308; background:#fefce8; }
-    .meta { font-size: 12px; opacity: .8; margin-top: 6px; }
-    .row { display:flex; gap:8px; align-items:center; margin:10px 0 6px; }
-    button { padding: 8px 12px; border-radius: 10px; border: 1px solid #e2e8f0; background:#fff; cursor:pointer; }
-    .muted { font-size:12px; color:#64748b; }
-    .small { font-size:12px; }
-  </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="color-scheme" content="light dark" />
+    <title>PhishGuard</title>
+    <link rel="stylesheet" href="taskpane.css" />
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <script defer src="taskpane.js"></script>
 </head>
 <body>
-  <h3>PhishGuard</h3>
-  <div class="small muted">Scans the currently opened email and shows SAFE / LOW / MED / HIGH.</div>
+    <h3>PhishGuard</h3>
+    <input id="debug" class="pg-input" placeholder="(optional) paste text to test" />
+    <div id="result"></div>
 
-  <div class="row">
-    <button id="scanBtn">Scan this email</button>
-  </div>
-
-  <div id="result" style="margin-top:12px;"></div>
-
-  <script src="taskpane.js"></script>
+    <h4 style="margin-top:14px;">Links found</h4>
+    <div id="links"></div>
 </body>
 </html>
