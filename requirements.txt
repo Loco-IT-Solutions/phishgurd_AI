@@ -7,3 +7,4 @@ beautifulsoup4==4.12.2
 tldextract==3.4.0
 python-whois==0.7.3
 nltk==3.9.0
+Procfile
