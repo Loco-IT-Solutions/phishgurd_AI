@@ -16,7 +16,7 @@ except ImportError:
 # ----- config -----
 ROOT = Path(__file__).resolve().parents[1]
 MODEL_PATH = ROOT / "models" / "pipeline.joblib"
-ADDIN_DIR = ROOT / "addin"  # folder with taskpane.html, taskpane.js, manifest.xml
+ADDIN_DIR = ROOT / "addin"  # taskpane.html, taskpane.js live here
 
 THRESHOLDS = {
     "high": 0.85,
@@ -36,7 +36,7 @@ def to_severity(p: float) -> str:
 # ----- app & model load -----
 app = Flask("phishguard_api")
 
-# allow Outlook web origins to call /predict from the taskpane
+# allow Outlook to call /predict from the taskpane (browser)
 CORS(app, resources={
     r"/predict": {
         "origins": [
@@ -62,7 +62,7 @@ else:
 def index():
     return (
         "<h2>PhishGuard API</h2>"
-        "<p>Try <code>GET /health</code> or send JSON to <code>POST /predict</code>.</p>"
+        "<p>Try <code>GET /health</code> or POST JSON to <code>/predict</code>.</p>"
         "<p>Add-in taskpane: <a href='/addin/taskpane.html'>/addin/taskpane.html</a></p>"
     )
 
