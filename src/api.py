@@ -4,7 +4,13 @@ import joblib
 from pathlib import Path
 import pandas as pd
 
-from preprocessing import extract_basic_features
+try:
+    # works when run as a package: gunicorn src.api:app
+    from .preprocessing import extract_basic_features
+except ImportError:
+    # fallback for local `python src/api.py`
+    from src.preprocessing import extract_basic_features
+
 
 # ----- config -----
 ROOT = Path(__file__).resolve().parents[1]

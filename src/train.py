@@ -18,7 +18,11 @@ from sklearn.preprocessing import StandardScaler, FunctionTransformer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 
-from preprocessing import extract_basic_features
+try:
+    from .preprocessing import extract_basic_features
+except ImportError:
+    from src.preprocessing import extract_basic_features
+
 
 ROOT = Path(__file__).resolve().parents[1]
 MODELS_DIR = ROOT / "models"
