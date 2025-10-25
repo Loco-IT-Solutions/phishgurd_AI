@@ -2,19 +2,25 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="color-scheme" content="light dark" />
     <title>PhishGuard</title>
-    <link rel="stylesheet" href="taskpane.css" />
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-    <script defer src="taskpane.js"></script>
+    <link rel="stylesheet" href="taskpane.css" />
 </head>
 <body>
-    <h3>PhishGuard</h3>
-    <input id="debug" class="pg-input" placeholder="(optional) paste text to test" />
-    <div id="result"></div>
+    <h3 class="pg-h3">PhishGuard</h3>
+    <div class="pg-muted">Scans the currently opened email and shows SAFE / LOW / MED / HIGH.</div>
 
-    <h4 style="margin-top:14px;">Links found</h4>
-    <div id="links"></div>
+    <div class="pg-row">
+        <button id="scanBtn" class="pg-btn">Scan this email</button>
+    </div>
+
+    <!-- result badge goes here -->
+    <div id="result" class="pg-space-top"></div>
+
+    <!-- optional links section -->
+    <h4 class="pg-h4">Links found</h4>
+    <div id="links" class="pg-links"></div>
+
+    <script src="taskpane.js"></script>
 </body>
 </html>

@@ -1,81 +1,78 @@
-/* Base theme tokens */
-:root{
-  --bg:#ffffff;
-  --fg:#0f172a;          /* text */
-  --muted:#64748b;
-  --panel:#f8fafc;
-  --border:#e2e8f0;
+/* Base + theme-aware colors */
+:root {
+  --pg-fg: #0f172a;          /* text */
+  --pg-fg-muted: #475569;    /* secondary text */
+  --pg-bg: #ffffff;          /* page bg */
+  --pg-card: #f8fafc;        /* card bg */
+  --pg-border: #e2e8f0;      /* borders */
 
-  --safe:#16a34a;
-  --low:#eab308;
-  --med:#f59e0b;
-  --high:#b91c1c;
+  --pg-safe: #16a34a;
+  --pg-low: #eab308;
+  --pg-med: #f59e0b;
+  --pg-high: #b91c1c;
+  --pg-info: #0ea5e9;
 }
 
-/* Auto match Outlook dark mode */
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#0b0f19;
-    --fg:#e5e7eb;
-    --muted:#9aa4b2;
-    --panel:#111827;
-    --border:#1f2937;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pg-fg: #e5e7eb;
+    --pg-fg-muted: #94a3b8;
+    --pg-bg: #0b1220;
+    --pg-card: #0f1629;
+    --pg-border: #1f2a44;
   }
 }
 
-html,body{
-  margin:0;
-  padding:12px 14px;
-  font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
-  background:var(--bg);
-  color:var(--fg);
+html, body {
+  background: transparent; /* let Outlook host paint the panel */
+  color: var(--pg-fg);
+  font-family: system-ui, "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  padding: 14px;
 }
 
-/* Inputs & buttons */
-input[type="text"], .pg-input{
-  width:100%;
-  padding:8px 10px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:var(--panel);
-  color:var(--fg);
-  outline:none;
-}
-button.pg{
-  padding:8px 12px;
-  border:0;
-  border-radius:8px;
-  background:#0ea5e9;
-  color:#fff;
-  cursor:pointer;
+/* headings & text */
+.pg-h3 { margin: 0 0 8px 0; font-size: 16px; font-weight: 700; }
+.pg-h4 { margin: 18px 0 8px 0; font-size: 13px; font-weight: 700; }
+.pg-muted { font-size: 12px; color: var(--pg-fg-muted); }
+.pg-space-top { margin-top: 12px; }
+
+/* row + button */
+.pg-row { display: flex; gap: 8px; align-items: center; margin: 10px 0 8px; }
+.pg-btn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--pg-border);
+  background: var(--pg-bg);
+  color: var(--pg-fg);
+  cursor: pointer;
 }
 
-/* Badge card */
-#result { margin-top:10px; }
-.pg-badge{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-left:6px solid var(--safe);
-  border-radius:10px;
-  padding:12px;
-  color:var(--fg);
+/* generic info bar (used for “Scanning…”/errors) */
+.bar {
+  border-left: 6px solid var(--pg-info);
+  padding: 12px;
+  background: var(--pg-card);
+  border-radius: 10px;
+  font-size: 13px;
 }
-.pg-badge.low { border-left-color:var(--low); }
-.pg-badge.medium { border-left-color:var(--med); }
-.pg-badge.high { border-left-color:var(--high); }
 
-.pg-title{ font-weight:700; margin-bottom:6px; }
-.pg-sub{ font-size:12px; color:var(--muted); }
-
-/* Links list */
-#links { margin-top:14px; }
-.pg-link{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:10px;
-  margin:8px 0;
-  color:var(--fg);
+/* result badge */
+.pg-badge {
+  border-left: 6px solid var(--pg-safe);
+  padding: 12px;
+  background: var(--pg-card);
+  border-radius: 10px;
 }
-.pg-link a{ color:#0ea5e9; text-decoration:none; }
-.pg-link a:hover{ text-decoration:underline; }
+
+.pg-badge.low    { border-left-color: var(--pg-low); }
+.pg-badge.medium { border-left-color: var(--pg-med); }
+.pg-badge.high   { border-left-color: var(--pg-high); }
+
+.pg-title { font-weight: 700; margin: 0 0 4px 0; }
+.pg-sub   { font-size: 12px; color: var(--pg-fg-muted); }
+
+/* links list */
+.pg-links { display: grid; gap: 10px; }
+.pg-link  { padding: 10px 12px; border: 1px solid var(--pg-border); border-radius: 10px; }
+.pg-link a { word-break: break-all; color: inherit; text-decoration: underline; }
