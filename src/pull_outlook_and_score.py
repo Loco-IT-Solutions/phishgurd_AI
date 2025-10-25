@@ -14,7 +14,9 @@ API_ME_MESSAGES = (
     "&$select=subject,from,bodyPreview,receivedDateTime,webLink"
 )
 
-PHISHGUARD_URL = "http://127.0.0.1:5000/predict"  # your local API
+#PHISHGUARD_URL = "http://127.0.0.1:5000/predict"  # your local API
+
+PHISHGUARD_URL = "https://phishgurd-ai.onrender.com/predict"
 
 SEV_ICONS = {"high": "🚨 HIGH", "medium": "⚠️  MED", "low": "🟡 LOW", "safe": "✅ SAFE"}
 
