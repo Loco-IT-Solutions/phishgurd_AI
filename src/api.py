@@ -1,8 +1,10 @@
 # src/api.py
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import joblib
 from pathlib import Path
 import pandas as pd
+from flask_cors import CORS
+import os
 
 try:
     # works when run as a package: gunicorn src.api:app
@@ -11,10 +13,10 @@ except ImportError:
     # fallback for local `python src/api.py`
     from src.preprocessing import extract_basic_features
 
-
 # ----- config -----
 ROOT = Path(__file__).resolve().parents[1]
 MODEL_PATH = ROOT / "models" / "pipeline.joblib"
+ADDIN_DIR = ROOT / "addin"  # folder with taskpane.html, taskpane.js, manifest.xml
 
 THRESHOLDS = {
     "high": 0.85,
@@ -33,6 +35,20 @@ def to_severity(p: float) -> str:
 
 # ----- app & model load -----
 app = Flask("phishguard_api")
+
+# allow Outlook web origins to call /predict from the taskpane
+CORS(app, resources={
+    r"/predict": {
+        "origins": [
+            "https://outlook.office.com",
+            "https://outlook.live.com",
+            "https://outlook.office365.com",
+            "https://www.office.com",
+            "https://phishgurd-ai.onrender.com"
+        ]
+    }
+})
+
 print("Loading model...", MODEL_PATH)
 clf = None
 if MODEL_PATH.exists():
@@ -47,6 +63,7 @@ def index():
     return (
         "<h2>PhishGuard API</h2>"
         "<p>Try <code>GET /health</code> or send JSON to <code>POST /predict</code>.</p>"
+        "<p>Add-in taskpane: <a href='/addin/taskpane.html'>/addin/taskpane.html</a></p>"
     )
 
 @app.route("/health", methods=["GET"])
@@ -93,7 +110,14 @@ def predict():
         "reasons": reasons
     })
 
-import os
+# ----- serve add-in files over HTTPS from Render -----
+@app.route("/addin/")
+def addin_root():
+    return send_from_directory(ADDIN_DIR, "taskpane.html")
+
+@app.route("/addin/<path:filename>")
+def addin_static(filename):
+    return send_from_directory(ADDIN_DIR, filename)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
-
