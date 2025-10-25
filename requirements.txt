@@ -1,7 +1,7 @@
 --only-binary=:all:
 flask==3.0.3
 gunicorn==22.0.0
-numpy==2.3.4
+numpy==2.2.6
 scipy==1.14.1
 scikit-learn==1.6.1
 pandas==2.2.3
